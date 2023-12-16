@@ -14,7 +14,7 @@ Understanding land cover classes has large implications in understanding antropo
 **Study area and training data**
 -   polygon representing southern Santa Barbara county and polygons representing training sites
 
-The data is too large to be pushed to this repository, so download the data [here](https://drive.google.com/drive/folders/1ON8FbDqcTjg2PKHmNGgyN7odTqpOnXla?usp=sharing) and save it locally into a data folder. The data folder is already added to the .gitignore as 'data/'.
+**The data is too large to be pushed to this repository, so download the data [here](https://drive.google.com/drive/folders/1ON8FbDqcTjg2PKHmNGgyN7odTqpOnXla?usp=sharing) and save it locally into a data folder. The data folder is already added to the .gitignore as 'data/'.**
     
 ## Structure
 The structure of the repo is as follows:
