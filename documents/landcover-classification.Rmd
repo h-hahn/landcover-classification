@@ -11,7 +11,7 @@ date: "2023-12-15"
 
 Monitoring the distribution and change in land cover types can help us understand the impacts of phenomena like climate change, natural disasters, deforestation, and urbanization. Determining land cover types over large areas is a major application of remote sensing because we are able to distinguish different materials based on their spectral reflectance.
 
-Classifying remotely sensed imagery into landcover classes enables us to understand the distribution and change in landcover types over large areas. There are many approaches for performing landcover classification -- *supervised* approaches use training data labeled by the user, whereas *unsupervised* approaches use algorithms to create groups which are identified by the user afterward.\
+Classifying remotely sensed imagery into landcover classes enables us to understand the distribution and change in landcover types over large areas. There are many approaches for performing landcover classification -- *supervised* approaches use training data labeled by the user, whereas *unsupervised* approaches use algorithms to create groups which are identified by the user afterward.
 
 credit: this lab is based on a materials developed by Chris Kibler.
 
@@ -24,7 +24,7 @@ I am using a *decision tree classifier*. [Decision trees](https://medium.com/@ml
 
 #### *Data*
 
-**Landsat 5 Thematic Mapper**\
+**Landsat 5 Thematic Mapper**
 
 -   [Landsat 5](https://www.usgs.gov/landsat-missions/landsat-5)
 -   1 scene from September 25, 2007
@@ -117,7 +117,9 @@ landsat_masked <- mask(landsat_cropped, SB_county_south)
 rm(landsat, landsat_cropped, SB_county_south)
 ```
 
-***Convert Landsat values to reflectance*** I converted the values in the raster stack to correspond to reflectance values by removing erroneous values and applying any [scaling factors](https://www.usgs.gov/faqs/how-do-i-use-scale-factor-landsat-level-2-science-products#:~:text=Landsat%20Collection%202%20surface%20temperature,the%20scale%20factor%20is%20applied.) to convert to reflectance.\
+***Convert Landsat values to reflectance***
+
+I converted the values in the raster stack to correspond to reflectance values by removing erroneous values and applying any [scaling factors](https://www.usgs.gov/faqs/how-do-i-use-scale-factor-landsat-level-2-science-products#:~:text=Landsat%20Collection%202%20surface%20temperature,the%20scale%20factor%20is%20applied.) to convert to reflectance.
 
 The valid range of pixel values for this collection 7,273-43,636, with a multiplicative scale factor of 0.0000275 and an additive scale factor of -0.2. I reclassified any erroneous values as `NA` and updated the values for each pixel based on the scaling factors, so the pixel values range from 0-100%.
 
@@ -165,7 +167,9 @@ SB_training_data <- left_join(training_data_values, training_data_attributes, by
   mutate(type = as.factor(type))
 ```
 
-***Train decision tree classifier*** To train the decision tree, I first established the model formula (i.e. what our response and predictor variables are). The `rpart` function implements the [CART algorithm](https://medium.com/geekculture/decision-trees-with-cart-algorithm-7e179acee8ff). The `rpart` function needs to know the model formula and training data you would like to use. Because I am performing a classification, we set `method = "class"`. We also set `na.action = na.omit` to remove any pixels with `NA`s from the analysis.\
+***Train decision tree classifier***
+
+To train the decision tree, I first established the model formula (i.e. what our response and predictor variables are). The `rpart` function implements the [CART algorithm](https://medium.com/geekculture/decision-trees-with-cart-algorithm-7e179acee8ff). The `rpart` function needs to know the model formula and training data you would like to use. Because I am performing a classification, we set `method = "class"`. We also set `na.action = na.omit` to remove any pixels with `NA`s from the analysis.\
 
 To understand how the decision tree will classify pixels, I plotted the results. The decision tree is comprised of a hierarchy of binary decisions. Each decision rule has 2 outcomes based on a conditional statement pertaining to values in each spectral band.
 
@@ -183,7 +187,9 @@ SB_decision_tree <- rpart(formula = SB_formula,
 prp(SB_decision_tree)
 ```
 
-***Apply decision tree*** I then applied the decision tree to the entire image. The `terra` package includes a `predict()` function that applys a model to the data. In order for this to work properly, the names of the layers need to match the column names of the predictors used to train the decision tree. The `predict()` function will return a raster layer with integer values. These integer values correspond to the *factor levels* in the training data. To figure out what category each integer corresponds to, I inspected the levels of our training data.
+***Apply decision tree***
+
+I then applied the decision tree to the entire image. The `terra` package includes a `predict()` function that applys a model to the data. In order for this to work properly, the names of the layers need to match the column names of the predictors used to train the decision tree. The `predict()` function will return a raster layer with integer values. These integer values correspond to the *factor levels* in the training data. To figure out what category each integer corresponds to, I inspected the levels of our training data.
 
 ```{r include=TRUE}
 # classify image based on decision tree
