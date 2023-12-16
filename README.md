@@ -5,7 +5,6 @@ This repository contains an analysis which classifies landcover types to underst
 Understanding land cover classes has large implications in understanding antropogenic and environmental impacts on changes in environment over time.
 
 ## About the Data
-#### *Data*
 **Landsat 5 Thematic Mapper**
 -   [Landsat 5](https://www.usgs.gov/landsat-missions/landsat-5)
 -   1 scene from September 25, 2007
