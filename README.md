@@ -1,6 +1,6 @@
 # Mapping Landcover Classification
 ## Overview
-This repository contains an analysis which classifies landcover types to understand distribution and of landcover classes in Southern Santa Barbara County. The analysis uses a decision tree classifier, developed by training data, to classify pixels using a series of conditions based on values in spectral bands. It classifies four land cover types: green vegetation, dry grass or soil, urban, and water. Applying the decision tree to the image creates a map of land cover classes.
+This repository contains an analysis which classifies landcover types to understand distribution of landcover classes in Southern Santa Barbara County. The analysis uses a decision tree classifier, developed by training data, to classify pixels using a series of conditions based on values in spectral bands. It classifies four land cover types: green vegetation, dry grass or soil, urban, and water. Applying the decision tree to the image creates a map of land cover classes.
 
 Understanding land cover classes has large implications in understanding antropogenic and environmental impacts on changes in environment over time.
 
